@@ -211,25 +211,18 @@
 
     <dialog class="project-dialog" data-dialog>
       <button class="dialog-close" type="button" data-close aria-label="关闭">×</button>
-      <video
-        class="dialog-video"
-        data-dialog-video
-        controls
-        controlsList="nodownload noplaybackrate"
-        disablePictureInPicture
-        playsinline
-        preload="none"
-        oncontextmenu="return false"
-      ></video>
-      <div class="bili-player" data-bili-player hidden>
-        <iframe
-          data-bili-frame
-          title="B站视频播放器"
-          src=""
-          allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+      <div class="video-shell" data-video-shell>
+        <video
+          class="dialog-video"
+          data-dialog-video
+          controls
+          controlsList="nodownload noplaybackrate"
+          disablePictureInPicture
+          playsinline
+          preload="none"
+          oncontextmenu="return false"
+        ></video>
+        <button class="video-start" type="button" data-start-video>播放视频</button>
       </div>
       <div class="video-status" data-video-status hidden>
         视频待上传。请把加好个人 logo 的压缩版视频放入 assets/videos/，并使用对应文件名。
@@ -252,6 +245,6 @@
       </dl>
     </dialog>
 
-    <script src="script.js?v=20260603-bili-large"></script>
+    <script src="script.js?v=20260603-local-video-2"></script>
   </body>
 </html>

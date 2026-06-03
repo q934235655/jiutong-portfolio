@@ -920,13 +920,6 @@ a {
   width: min(960px, calc(100% - 32px));
 }
 
-.project-dialog.is-bili {
-  width: min(1180px, calc(100% - 48px));
-  max-height: calc(100vh - 48px);
-  padding: 34px;
-  overflow: auto;
-}
-
 .contact-dialog {
   width: min(560px, calc(100% - 32px));
 }
@@ -1107,36 +1100,47 @@ a {
 }
 
 .dialog-video {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  margin-bottom: 14px;
   border: 1px solid rgba(255, 255, 250, 0.26);
   border-radius: 18px;
   background: rgba(8, 11, 8, 0.62);
+  object-fit: cover;
 }
 
-.bili-player {
+.video-shell {
+  position: relative;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 16 / 9;
   margin-bottom: 14px;
-  border: 1px solid rgba(255, 255, 250, 0.26);
   border-radius: 18px;
   background: rgba(8, 11, 8, 0.62);
 }
 
-.bili-player iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
+.video-start {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-grid;
+  place-items: center;
+  min-width: 132px;
+  height: 46px;
+  padding: 0 22px;
+  border: 1px solid rgba(255, 255, 250, 0.54);
+  border-radius: 999px;
+  background: rgba(255, 255, 248, 0.82);
+  color: rgba(18, 22, 17, 0.92);
+  box-shadow: 0 18px 46px rgba(8, 10, 8, 0.28);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 800;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(14px) saturate(140%);
 }
 
-.project-dialog.is-bili .bili-player {
-  margin-bottom: 24px;
-}
-
-.project-dialog.is-bili .video-actions {
+.video-start[hidden] {
   display: none;
 }
 
@@ -1212,17 +1216,6 @@ a {
 }
 
 @media (max-width: 820px) {
-  .project-dialog.is-bili {
-    width: calc(100% - 20px);
-    max-height: calc(100vh - 20px);
-    padding: 16px;
-    border-radius: 20px;
-  }
-
-  .project-dialog.is-bili .bili-player {
-    border-radius: 14px;
-  }
-
   .works-popup-grid {
     grid-template-columns: repeat(2, 1fr);
   }
