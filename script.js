@@ -4,8 +4,11 @@ const cards = document.querySelectorAll("[data-category]");
 const dialog = document.querySelector("[data-dialog]");
 const closeDialog = document.querySelector("[data-close]");
 const dialogVideo = dialog.querySelector("[data-dialog-video]");
+const biliPlayer = dialog.querySelector("[data-bili-player]");
+const biliFrame = dialog.querySelector("[data-bili-frame]");
 const videoStatus = dialog.querySelector("[data-video-status]");
 const fullPlay = dialog.querySelector("[data-full-play]");
+const externalPlay = dialog.querySelector("[data-external-play]");
 const worksDialog = document.querySelector("[data-works-dialog]");
 const openWorks = document.querySelector("[data-open-works]");
 const closeWorks = document.querySelector("[data-works-close]");
@@ -18,7 +21,7 @@ const closeServices = document.querySelector("[data-services-close]");
 const aboutDialog = document.querySelector("[data-about-dialog]");
 const openAbout = document.querySelector("[data-open-about]");
 const closeAbout = document.querySelector("[data-about-close]");
-const assetVersion = "20260603-mobile";
+const assetVersion = "20260603-bili-preview";
 const useMobileVideo =
   window.matchMedia("(max-width: 760px)").matches ||
   /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -110,7 +113,10 @@ const projects = {
     copy: "收录旅拍、情绪短片和个人创作内容，呈现不同场景下的镜头表达、剪辑节奏与画面风格。",
     role: "拍摄 / 剪辑 / 调色 / 风格化制作",
     output: "个人短片合集",
-    video: "assets/videos/personal-shorts.mp4"
+    video: "assets/videos/personal-shorts.mp4",
+    bilibili:
+      "https://player.bilibili.com/player.html?bvid=BV1fh411Q7M3&page=1&high_quality=1&autoplay=0",
+    external: "https://www.bilibili.com/video/BV1fh411Q7M3/"
   }
 };
 
@@ -147,12 +153,20 @@ document.querySelectorAll("[data-project]").forEach((button) => {
     dialog.querySelector("[data-dialog-role]").textContent = project.role;
     dialog.querySelector("[data-dialog-output]").textContent = project.output;
     dialogVideo.pause();
-    dialogVideo.hidden = false;
+    dialogVideo.hidden = Boolean(project.bilibili);
+    biliPlayer.hidden = !project.bilibili;
     videoStatus.hidden = true;
-    fullPlay.hidden = false;
+    fullPlay.hidden = Boolean(project.bilibili);
+    externalPlay.hidden = !project.external;
+    if (project.external) {
+      externalPlay.href = project.external;
+    }
     dialogVideo.removeAttribute("src");
+    biliFrame.src = "";
     dialogVideo.load();
-    if (project.video) {
+    if (project.bilibili) {
+      biliFrame.src = project.bilibili;
+    } else if (project.video) {
       dialogVideo.src = `${getVideoSource(project.video)}?v=${assetVersion}`;
     }
     dialog.showModal();
@@ -219,6 +233,7 @@ closeDialog.addEventListener("click", () => dialog.close());
 
 dialog.addEventListener("close", () => {
   dialogVideo.pause();
+  biliFrame.src = "";
 });
 
 dialogVideo.addEventListener("error", () => {

@@ -221,11 +221,22 @@
         preload="none"
         oncontextmenu="return false"
       ></video>
+      <div class="bili-player" data-bili-player hidden>
+        <iframe
+          data-bili-frame
+          title="B站视频播放器"
+          src=""
+          allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
       <div class="video-status" data-video-status hidden>
         视频待上传。请把加好个人 logo 的压缩版视频放入 assets/videos/，并使用对应文件名。
       </div>
       <div class="video-actions">
         <button class="full-play-action" type="button" data-full-play>全屏播放</button>
+        <a class="external-play-action" href="#" target="_blank" rel="noopener" data-external-play hidden>打开B站播放</a>
       </div>
       <p class="dialog-label" data-dialog-label></p>
       <h2 data-dialog-title></h2>
@@ -242,6 +253,6 @@
       </dl>
     </dialog>
 
-    <script src="script.js?v=20260603-mobile"></script>
+    <script src="script.js?v=20260603-bili-preview"></script>
   </body>
 </html>
