@@ -18,6 +18,7 @@ const closeServices = document.querySelector("[data-services-close]");
 const aboutDialog = document.querySelector("[data-about-dialog]");
 const openAbout = document.querySelector("[data-open-about]");
 const closeAbout = document.querySelector("[data-about-close]");
+const assetVersion = "20260603-fast";
 
 const projects = {
   brand: {
@@ -144,7 +145,7 @@ document.querySelectorAll("[data-project]").forEach((button) => {
     dialogVideo.removeAttribute("src");
     dialogVideo.load();
     if (project.video) {
-      dialogVideo.src = project.video;
+      dialogVideo.src = `${project.video}?v=${assetVersion}`;
     }
     dialog.showModal();
   });
