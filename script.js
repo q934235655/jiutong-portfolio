@@ -8,7 +8,6 @@ const biliPlayer = dialog.querySelector("[data-bili-player]");
 const biliFrame = dialog.querySelector("[data-bili-frame]");
 const videoStatus = dialog.querySelector("[data-video-status]");
 const fullPlay = dialog.querySelector("[data-full-play]");
-const externalPlay = dialog.querySelector("[data-external-play]");
 const worksDialog = document.querySelector("[data-works-dialog]");
 const openWorks = document.querySelector("[data-open-works]");
 const closeWorks = document.querySelector("[data-works-close]");
@@ -21,7 +20,7 @@ const closeServices = document.querySelector("[data-services-close]");
 const aboutDialog = document.querySelector("[data-about-dialog]");
 const openAbout = document.querySelector("[data-open-about]");
 const closeAbout = document.querySelector("[data-about-close]");
-const assetVersion = "20260603-bili-preview";
+const assetVersion = "20260603-bili-large";
 const useMobileVideo =
   window.matchMedia("(max-width: 760px)").matches ||
   /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -115,8 +114,7 @@ const projects = {
     output: "个人短片合集",
     video: "assets/videos/personal-shorts.mp4",
     bilibili:
-      "https://player.bilibili.com/player.html?bvid=BV1fh411Q7M3&page=1&high_quality=1&autoplay=0",
-    external: "https://www.bilibili.com/video/BV1fh411Q7M3/"
+      "https://player.bilibili.com/player.html?bvid=BV1fh411Q7M3&page=1&high_quality=1&danmaku=0&autoplay=0"
   }
 };
 
@@ -152,15 +150,12 @@ document.querySelectorAll("[data-project]").forEach((button) => {
     dialog.querySelector("[data-dialog-copy]").textContent = project.copy;
     dialog.querySelector("[data-dialog-role]").textContent = project.role;
     dialog.querySelector("[data-dialog-output]").textContent = project.output;
+    dialog.classList.toggle("is-bili", Boolean(project.bilibili));
     dialogVideo.pause();
     dialogVideo.hidden = Boolean(project.bilibili);
     biliPlayer.hidden = !project.bilibili;
     videoStatus.hidden = true;
     fullPlay.hidden = Boolean(project.bilibili);
-    externalPlay.hidden = !project.external;
-    if (project.external) {
-      externalPlay.href = project.external;
-    }
     dialogVideo.removeAttribute("src");
     biliFrame.src = "";
     dialogVideo.load();
